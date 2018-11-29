@@ -31,7 +31,7 @@ void* func (void *s)		// function to send all the words
 
 	int i = 0;
 	char buffer[LINESIZE];
-	char *words[NUMWORDS];
+	char *words[NUMWORDS]; //array of words
 	struct sockaddr_in server,client;
 
 	while(1)
