@@ -1,7 +1,7 @@
 #include <math.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include <bool.h>
+#include <stdbool.h>
 #include "firewall.h"
 /*
 firewall.c
