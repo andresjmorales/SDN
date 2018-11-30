@@ -11,59 +11,18 @@ static int intcmp(const void *p1, const void *p2){
     return *(int*)p1 > *(int*)p2;
 }
 
-//recursive function predecessors() will traverse array P for the predecessor to each predecessor... inception
-void predecessors(int P[], int index)
-{
-    if (P[index] == - 1){
-        //source should be -1 in predecessor. self has no predecessor
-        return;//return to break recursive function
-    }
-    
-    predecessors(P, P[index]);
-    
-    //check case by case which letter to print
-    if(index == 0){
-        printf("u ");
-    }
-    else if(index == 1){
-        printf("v ");
-    }
-    else if(index == 2){
-        printf("w ");
-    }
-    else if(index == 3){
-        printf("x ");
-    }
-    else if(index == 4){
-        printf("y ");
-    }
-    else if(index == 5){
-        printf("z ");
-    }
-}
-
-
 int dijkstra(int *table, int dimension){
     
     /* ********************************************INITIALIZING VALUES*********************************************/
 
-    /*const int C[6][6] = {
-        {0, 7, 3, 5, 10000, 10000},
-        {7, 0, 3, 10000, 4, 10000},
-        {3, 3, 0, 4, 8, 10000},
-        {5, 10000, 4, 0, 7, 9},
-        {10000, 4, 8, 7, 0, 2},
-        {10000, 10000, 10000, 9, 2, 0}
-    };*/
  
-  
-    bool Np[dimension]; //N' Array to keep track of nodes that have the shortest path, basically sotre 0 or 1, true or false, if node is already in shortest path tree
+    bool Np[dimension]; //N' Array to keep track of nodes that have the shortest path, basically use 0 or 1, true or false, if node is already in shortest path tree
     int D[dimension], P[dimension]; //array to store the costs or distances between nodes, array to store predecessor nodes, source is 0 or u
     
     for (int i = 0; i < dimension; i++){
         P[i] = -1; //predecessor nodes set to -1
         if(i == 0){
-            D[i] = 0;//cost to source node, u, should be 0
+            D[i] = 0;//cost to source node should be 0
         }
         else{
             D[i] = 10000; //Dijkstra's algorithm states that all costs should be initialized to infinity
@@ -88,7 +47,7 @@ int dijkstra(int *table, int dimension){
         
         Np[index] = true; //the node is now in the shortest path tree
         for (int j = 0; j < dimension; ++j){
-            if (Np[j] == false && table[index][j] && D[index] + table[index][j] < D[j]){ //if it's not in the shortest path tree and the initial cost in C and the new cost d + c are less than what is in the cost array D
+            if (Np[j] == false && table[index][j] && D[index] + table[index][j] < D[j]){ //if it's not in the shortest path tree and the initial cost in table and the new cost d + table are less than what is in the cost array D
                 P[j] = index; //set predecessor node
                 D[j] = D[index] + table[index][j]; //set new cost to get to node since multiple nodes were reached
             }
@@ -116,19 +75,20 @@ int dijkstra(int *table, int dimension){
     for(int i=0; i< dimension; ++i){
         for(int j =0; j< dimension; ++j){
             /*
-             Logic: compare unsorted and sorted arrays... the D cost array is ordered by index, where the index represents a node. example: 0 is u, 1 is v, etc. check the unsorted list for a matching cost. when a match is found, we know what letter to print based off of the index of the unsorted list.
+             Logic: compare unsorted and sorted arrays... the D cost array is ordered by index, where the index represents a node. example: 0 is origin , 1 is device, etc. check the unsorted list for a matching cost. when a match is found, we know what letter to print based off of the index of the unsorted list.
              
              */
             if(d2[j] == D[i]){
                
-              if(i == (dimension - 1)){
+              if(j == (dimension - 1)){
                
-                printf("Device %d\n", i);
+                printf("Device %d\n", j); //last device
                
               }
               else{
-                printf("Device %d --> ", i);
+                printf("Device %d --> ", j);
               }
+	    }
         }
     }
     
