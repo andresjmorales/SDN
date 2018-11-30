@@ -11,6 +11,7 @@
 #define SORT_PORT 1719
 #define LINESIZE 80
 #define NUMWORDS 50
+#define KEY 1000
 
 void sort(char *str[],int n){
 	int i, j;
@@ -34,8 +35,12 @@ void* func (void *s)		// function to send all the words
 	char *words[NUMWORDS]; //array of words
 	struct sockaddr_in server,client;
 
+	int auth = rand() % KEY;
+	send(*(int*)s, auth, sizeof(auth), 0);
+	
 	while(1)
-	{			//
+	{
+		send(*(int*)s, generate_key(), sizeof(
 		int word_len = recv(*(int*)s, &buffer, LINESIZE, 0);
 		if (strcmp(buffer, "0\n") == 0) {
 			break;
@@ -92,7 +97,6 @@ int main (int argc, char *argv[])
 		     exit(1);
 		}
 		pthread_create(&thread, NULL, func, sockfd);
-
 	}
 	printf("\n\n");
 	exit(0);
