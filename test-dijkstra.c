@@ -1,7 +1,5 @@
 /*
  
- COEN 146 Lab 7
- 
  Data:define N, E, C, and “empty” Nprime arrays
  set source node to u
  Define D(v) cost of path from source u to dest v
