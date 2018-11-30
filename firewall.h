@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <bool.h>
+#include <stdbool.h>
 /*
 firewall.c
 Function will accept the key passed through the socket from the SDN Controller and check if it is an authorized or unauthorized value.
