@@ -11,7 +11,7 @@
 #define SORT_PORT 1719
 #define LINESIZE 80
 #define NUMWORDS 50
-#define KEY 1000
+#define LIMIT 1000
 
 void sort(char *str[],int n) {
 	int i, j;
@@ -35,12 +35,13 @@ void* func (void *s)		// function to send all the words
 	char *words[NUMWORDS]; //array of words
 	struct sockaddr_in server,client;
 
-	int auth = rand() % KEY;
-	send(*(int*)s, auth, sizeof(auth), 0);
+	int key = rand() % LIMIT;
+	send(*(int*)s, key, sizeof(key));
+	send(*(int*)s, LIMIT, sizeof(LIMIT));
 	
 	while(1)
 	{
-		send(*(int*)s, generate_key(), sizeof(auth));
+
 		int word_len = recv(*(int*)s, &buffer, LINESIZE, 0);
 		if (strcmp(buffer, "0\n") == 0)
 			break;
