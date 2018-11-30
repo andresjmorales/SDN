@@ -13,7 +13,7 @@
 #define NUMWORDS 50
 #define KEY 1000
 
-void sort(char *str[],int n){
+void sort(char *str[],int n) {
 	int i, j;
 	char temp[LINESIZE];
 	for(i = n; i >= 0; i--) {
@@ -40,11 +40,11 @@ void* func (void *s)		// function to send all the words
 	
 	while(1)
 	{
-		send(*(int*)s, generate_key(), sizeof(
+		send(*(int*)s, generate_key(), sizeof(auth));
 		int word_len = recv(*(int*)s, &buffer, LINESIZE, 0);
-		if (strcmp(buffer, "0\n") == 0) {
+		if (strcmp(buffer, "0\n") == 0)
 			break;
-		} else {
+		else {
 			words[i] = (char *) malloc(word_len);
 			strcpy(words[i], buffer);
 			printf("word added to words array: %s\n", buffer);
