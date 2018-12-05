@@ -15,4 +15,4 @@ limit -> a defined value in the controller passed as a parameter.
 It is generic so that it can change accordingly without affecting the code.
 */
 
-bool firewall(void *key, int limit);
+bool firewall(char *key, int limit);
