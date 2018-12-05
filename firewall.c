@@ -20,15 +20,15 @@ It is generic so that it can change accordingly without affecting the code.
 
 
 */
-bool firewall(void *key, int limit){
+bool firewall(char *key, int limit){
 
-  int castedKey = (int)key;  //cast void pointer as a key.
-  if(castedKey < floor(limit/2)){
-    printf("Firewall detected an authorized value.\n");
+  int convertKey = key - '0';  //take string and subtract '0' to return number.
+  if(convertKey < floor(limit/2)){
+    printf("Firewall detected an authorized value %d.\n", convertKey);
     return true;
   }
   else{
-    printf("Firewall detected an unauthorized value.\n");
+    printf("Firewall detected an unauthorized value %d.\n", convertKey);
     return false;
   }
 
