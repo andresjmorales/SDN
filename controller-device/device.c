@@ -8,6 +8,8 @@
 #include <errno.h>
 #include <string.h>
 #include <stdlib.h>
+#include <stdbool.h>
+#define LIMIT 1000
 
 int main(int argc, char* argv[])
 {
@@ -18,6 +20,8 @@ int main(int argc, char* argv[])
 	}
 
     int sockfd;
+    int bytes_length = 0, check = 1;
+    char checkarr[2];
     struct sockaddr_in server_addr;
     char send_data[1024];
     struct hostent *host = (struct hostent *)gethostbyname((argc > ip_ind) ? argv[ip_ind] : "localhost");
@@ -37,14 +41,26 @@ int main(int argc, char* argv[])
     while (!feof(f))
         bytes_read = fread(&send_data,1,sizeof(send_data),f);
 */
-	
+	//add receive line
+	bytes_length = recvfrom(sockfd,recv_data,1024,0, (struct sockaddr *)&server_addr, &addr_len);
+	bool freturn = firewall(recv_data, LIMIT);
+	if(freturn){
+		check = 1;
+		sprintf(checkarr, "%d", check)
+		sendto(sockfd, checkarr, bytes_length, 0, (struct sockaddr *)&server_addr, sizeof(struct sockaddr));
+	}
+	else{
+		check = 0;
+		sprintf(checkarr, "%d", check)
+		sendto(sockfd, checkarr, bytes_length, 0, (struct sockaddr *)&server_addr, sizeof(struct sockaddr));
+	}
 	// authentication
 	// receive authentication number
 	// runs firewall on that authentication number
 	// disconnect if blocked by firewall
 	
-	sendto(sockfd, send_data, bytes_read, 0, (struct sockaddr *)&server_addr, sizeof(struct sockaddr));
-    fclose(f);
+	//sendto(sockfd, send_data, bytes_read, 0, (struct sockaddr *)&server_addr, sizeof(struct sockaddr));
+    //fclose(f);
 
     return 0;
 }
