@@ -41,16 +41,20 @@ int main(int argc, char* argv[])
     bzero(&(server_addr.sin_zero), 8);
     
 
-	// send file
-    FILE *f;
-    f = fopen(argv[1],"r");		// open file given in terminal
 
+// send file
+/*
+	FILE *f;
+    f = fopen(argv[1],"r");		// open file given in terminal
+*/
 	// read data from file
+/*
 	int bytes_read;
     while (!feof(f)) {
         bytes_read = fread(&send_data,1,sizeof(send_data),f);
     }
-    sendto(sockfd, send_data, bytes_read, 0,
+*/
+	sendto(sockfd, send_data, bytes_read, 0,
                (struct sockaddr *)&server_addr, sizeof(struct sockaddr));
     fclose(f);
 
