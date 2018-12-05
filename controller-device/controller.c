@@ -9,6 +9,13 @@
 #include <string.h>
 #include <stdlib.h>
 
+int auth(){
+	srand(time(0)); 
+	int auth = rand();
+	return auth;
+	
+}
+
 char helpText[] = "Usage:\n\t./udp_server2 output_file_name\n";
 
 int main(int argc, char* argv[]) {
@@ -52,12 +59,12 @@ int main(int argc, char* argv[]) {
 		recv_data[bytes_read] = '\0';
 
 		// Write recieved characters to the specified file.
-		FILE * ofp = fopen(argv[1], "w");
-
-		if(!ofp) {
+		//FILE * ofp = fopen(argv[1], "w");
+		firewall();
+		//if(!ofp) {
 				printf("Can't open file.");
 			return;
-		}
+		//}
 
 		fwrite(recv_data, bytes_read, 1, ofp);
 		fclose(ofp);
