@@ -8,6 +8,8 @@
 #include <errno.h>
 #include <string.h>
 #include <stdlib.h>
+#include <firewall.h>
+#define LIMIT 1000
 
 int auth(){
 	srand(time(0)); 
@@ -60,14 +62,14 @@ int main(int argc, char* argv[]) {
 
 		// Write recieved characters to the specified file.
 		//FILE * ofp = fopen(argv[1], "w");
-		firewall();
+		firewall(recv_data, LIMIT);
 		//if(!ofp) {
-				printf("Can't open file.");
-			return;
+				//printf("Can't open file.");
+			//return;
 		//}
 
-		fwrite(recv_data, bytes_read, 1, ofp);
-		fclose(ofp);
+		//fwrite(recv_data, bytes_read, 1, ofp);
+		//fclose(ofp);
 
 		// Display characters read (for confirmation).
 		printf("\n(%s , %d) said : ",inet_ntoa(client_addr.sin_addr),
