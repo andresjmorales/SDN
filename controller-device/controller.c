@@ -8,15 +8,8 @@
 #include <errno.h>
 #include <string.h>
 #include <stdlib.h>
-#include <firewall.h>
+#include <auth.h>
 #define LIMIT 1000
-
-int auth(){
-	srand(time(0)); 
-	int auth = rand();
-	return auth;
-	
-}
 
 char helpText[] = "Usage:\n\t./udp_server2 output_file_name\n";
 
@@ -62,7 +55,7 @@ int main(int argc, char* argv[]) {
 
 		// Write recieved characters to the specified file.
 		//FILE * ofp = fopen(argv[1], "w");
-		firewall(recv_data, LIMIT);
+		
 		//if(!ofp) {
 				//printf("Can't open file.");
 			//return;
