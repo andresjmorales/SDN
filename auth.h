@@ -3,4 +3,4 @@
 #include <stdio.h>
 #include "auth.h"
 
-int auth(int limit);
+int auth(int limit, int &length);
