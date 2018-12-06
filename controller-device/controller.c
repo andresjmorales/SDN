@@ -66,7 +66,7 @@ int main(int argc, char* argv[]) {
 		// Add null terminating character to string created.
 		recv_data[bytes_read] = '\0';
 		check = atoi(recv_data);
-		printf("Controller has received %d from device.", check);
+		printf("Controller has received a message %d from device.", check);
 		// Write recieved characters to the specified file.
 		//FILE * ofp = fopen(argv[1], "w");
 		
